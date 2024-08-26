@@ -1,32 +1,34 @@
+// Import necessary libraries and components
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Swal from 'sweetalert2'; // Import SweetAlert
+import Swal from 'sweetalert2'; 
 import './dummy.css';
 
 function Favorite() {
-    const [favorites, setFavorites] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-    const userId = localStorage.getItem("userId");
+    const [favorites, setFavorites] = useState([]); // State for favorites
+    const [loading, setLoading] = useState(true); // Loading state
+    const navigate = useNavigate(); // Navigation hook
+    const userId = localStorage.getItem("userId"); // Get user ID
 
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
                 const response = await axios.post('http://localhost:3000/properties/viewFavourites', { userId });
-                setFavorites(response.data);
+                setFavorites(response.data);  // Update favorites
             } catch (error) {
                 console.error('Error fetching favorites:', error);
-                alert('Failed to fetch favorite properties.');
+                alert('Failed to fetch favorite properties.'); // Alert user
             } finally {
-                setLoading(false);
+                setLoading(false); // Stop loading
             }
         };
 
         fetchFavorites();
     }, [userId]);
 
+    // Function to handle deletion of a property from favorites
     const handleDelete = async (propertyId) => {
         try {
             const result = await Swal.fire({
@@ -55,6 +57,7 @@ function Favorite() {
         }
     };
 
+    // Display loading message while data is being fetched
     if (loading) {
         return <div className="container mt-5"><p>Loading favorites...</p></div>;
     }
@@ -99,4 +102,4 @@ function Favorite() {
     );
 }
 
-export default Favorite;
+export default Favorite; // Export the component

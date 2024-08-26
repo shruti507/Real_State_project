@@ -47,14 +47,15 @@ export const register = async (req, res) => {
         if (user) return res.status(400).json({ msg: 'User already exists' });
 
         user = new User({ name, email, password });
-        await user.save();
+        await user.save(); // Save new user
+
 
         const token = jwt.sign({ id: user._id }, 'secret',);
         console.log('token: ', token);
-        return res.status(201).json({ token ,user});
+        return res.status(201).json({ token ,user}); // Log generated token
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ msg: 'Server error' });
+        return res.status(500).json({ msg: 'Server error' }); // Log error
     }
 };
 
@@ -66,7 +67,7 @@ export const signIn = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password); // Compare passwords
         if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
         const token = jwt.sign({ id: user._id }, 'secret',);

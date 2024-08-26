@@ -1,3 +1,4 @@
+//Import all neccesary modules
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -5,6 +6,7 @@ import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 
 function AddProperty() {
+  // State variables for form fields and token
   const [address, setAddress] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -13,6 +15,7 @@ function AddProperty() {
   const [token, setToken] = useState(null); // Token state
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId")
+
   useEffect(() => {
     // Retrieve token from sessionStorage
     const storedToken = localStorage.getItem('token');
@@ -144,4 +147,4 @@ function AddProperty() {
   );
 }
 
-export default AddProperty;
+export default AddProperty; // Export component

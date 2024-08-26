@@ -1,3 +1,4 @@
+// Import React, hooks, axios, Swal, CSS styles, and routing utilities
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -194,4 +195,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Contact; // Export component

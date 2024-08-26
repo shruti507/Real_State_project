@@ -1,5 +1,7 @@
+// Import Mongoose library
 import mongoose from "mongoose";
 
+// Define Contact schema
 const ContactSchema = new mongoose.Schema({
     userId: { 
         type: mongoose.Schema.Types.ObjectId, 
@@ -29,6 +31,8 @@ const ContactSchema = new mongoose.Schema({
     }
 });
 
+// Create Contact model
 const Contact = mongoose.model("Contact", ContactSchema);
 
+// Export Contact model
 export default Contact;

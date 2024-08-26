@@ -1,5 +1,5 @@
 import React from 'react';
-import './Signup.css'; // Assuming you have a CSS file for custom styles
+import './Signup.css';  // Import custom styles for the component
 
 const AboutUs = () => {
   return (
@@ -65,4 +65,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default AboutUs; // Export component for use in other parts of the application
