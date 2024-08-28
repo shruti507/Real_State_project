@@ -41,8 +41,8 @@ function AddProperty() {
     }
 
     try {
-      await axios.post(
-        'http://localhost:3000/properties/add-property',
+      // alert(process.env.REACT_APP_PROPERTY_CREATE_URL+" "+userId);
+     await axios.post(process.env.REACT_APP_PROPERTY_ADD_URL,
         {
           address,
           price,

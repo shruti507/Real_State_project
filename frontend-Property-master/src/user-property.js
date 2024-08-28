@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import noproperty from './Images/NoProperty.png';
-import Header from "./componet/Header";
+import Header from "./components/Header";
 import { useNavigate } from "react-router-dom";
 
 export default function UserProperty() {
@@ -38,7 +39,7 @@ export default function UserProperty() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3000/properties/deleteProperty/${data._id}`)
+                axios.delete(`http://localhost:3000/properties/removeProperty/${data._id}`)
                     .then(() => {
                         Swal.fire('Deleted!', 'Your property has been deleted.', 'success');
                         setProperty(property.filter(item => item._id !== data._id));
@@ -155,8 +156,8 @@ export default function UserProperty() {
                                             <td>{data.price}</td>
                                             <td>{data.description}</td>
                                             <td>{data.contactInfo}</td>
-                                            <td><span onClick={() => handleEdit(data)}>edit</span></td>
-                                            <td><span onClick={() => handleDelete(data)}>delete</span></td>
+                                            <td><span onClick={() => handleEdit(data)} style={{cursor:'pointer'}}><FaEdit size={20} color="blue" /></span></td>
+                                            <td><span onClick={() => handleDelete(data)} style={{cursor: 'pointer'}}><FaTrash size={20} color="red" /></span></td>
                                         </tr>
                                     ))}
                                 </tbody>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2'; // Import SweetAlert2
-import './dummy.css';
+import './Style.css';
 import nodataImg from '../Images/NoData.png';
 
 function DummyProperty(props) {
@@ -26,8 +26,7 @@ function DummyProperty(props) {
       return;
     }
 
-    axios.post(
-      'http://localhost:3000/properties/favorite',
+    axios.post(process.env.REACT_APP_PROPERTY_FAVORITE_URL,
       { propertyId, userId } // Send both propertyId and userId in the request body
     )
     .then(result => {
@@ -60,7 +59,7 @@ function DummyProperty(props) {
               <img src={nodataImg} style={{ height: '400px', width: '400px' }} alt='no image' />
             </div>
           ) : (
-            properties.map(property => (
+            properties?.map(property => (
               <div className="col-md-4 mb-4" key={property._id}>
                 <div className="card shadow-sm border-light">
                   <img

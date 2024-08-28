@@ -1,5 +1,5 @@
 import React from 'react';
-import './Signup.css'; // Assuming you have a CSS file for custom styles
+import './Style.css'; // Assuming you have a CSS file for custom styles
 
 const Footer = () => {
   return (

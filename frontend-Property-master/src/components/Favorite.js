@@ -4,32 +4,32 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2'; 
-import './dummy.css';
+import './Style.css';
 
 function Favorite() {
     const [favorites, setFavorites] = useState([]); // State for favorites
     const [loading, setLoading] = useState(true); // Loading state
     const navigate = useNavigate(); // Navigation hook
     const userId = localStorage.getItem("userId"); // Get user ID
-
     useEffect(() => {
-        const fetchFavorites = async () => {
             try {
-                const response = await axios.post('http://localhost:3000/properties/viewFavourites', { userId });
-                setFavorites(response.data);  // Update favorites
+                const response =  axios.post(process.env.REACT_APP_PROPERTY_VIEW_FAVORITES_URL, { userId }).then(result=>{
+                    setFavorites(result.data);  // Update favorites
+                    console.log(result.data)
+                }).catch(err=>{
+                    console.log(err);
+                });
             } catch (error) {
                 console.error('Error fetching favorites:', error);
                 alert('Failed to fetch favorite properties.'); // Alert user
             } finally {
                 setLoading(false); // Stop loading
             }
-        };
-
-        fetchFavorites();
-    }, [userId]);
+    }, []);
 
     // Function to handle deletion of a property from favorites
     const handleDelete = async (propertyId) => {
+        alert(propertyId)
         try {
             const result = await Swal.fire({
                 title: 'Are you sure?',
@@ -42,9 +42,7 @@ function Favorite() {
             });
 
             if (result.isConfirmed) {
-                const response = await axios.delete(`http://localhost:3000/properties/deleteProperty/${propertyId}`, {
-                    data: { userId }
-                });
+                const response = await axios.delete(`http://localhost:3000/properties/deleteProperty/${propertyId}/${userId}`);
 
                 if (response.status === 200) {
                     Swal.fire('Deleted!', 'The property has been removed from your favorites.', 'success');
@@ -62,11 +60,16 @@ function Favorite() {
         return <div className="container mt-5"><p>Loading favorites...</p></div>;
     }
 
+    // Display loading message while data is being fetched
+    if (loading) {
+        return <div className="container mt-5"><p>Loading favorites...</p></div>;
+    }
+
     return (
         <div className="container-lg mt-5 p-4 mb-5 bg-light rounded">
             <h2 className="mb-4">Your Favorite Properties</h2>
             <div className="row">
-                {!favorites.length ? (
+                {!favorites ? (
                     <div className="col-12 text-center">
                         <p>You have no favorite properties.</p>
                     </div>

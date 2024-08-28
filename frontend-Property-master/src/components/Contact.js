@@ -2,24 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import './Signup.css';
+import './Style.css';
 import { useLocation } from 'react-router-dom';
 
 const Contact = () => {
   const {state} = useLocation();
+  // alert(state)
   console.log(state)
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
     email: '',
     message: '',
-    userId:state
+    agentId:state.agentId,
+    userId:localStorage.getItem("userId")
   });
 
   useEffect(()=>{
     setFormData(prevFormData => ({
       ...prevFormData,
-      userId: state
+      userId: state.agentId
     }));
   },[state])
   // State for validation errors
@@ -62,7 +64,7 @@ const Contact = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData)
     // Validate inputs before submitting
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {

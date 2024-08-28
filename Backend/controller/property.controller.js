@@ -191,11 +191,13 @@ export const getFavorites = async (req, res) => {
     }
 };
 
-// Delete Property
+// Remove Property from favorites 
 
 export const unmarkAsFavorite = async (req, res) => {
     try {
-        const { propertyId, userId } = req.body; // Extract propertyId and userId from the request body
+        console.log(res.params);
+        console.log(req.body)
+        const { propertyId, userId } = req.params; // Extract propertyId and userId from the request body
         const property = await Property.findById(propertyId);
         
         if (!property) return res.status(404).json({ msg: 'Property not found' });
@@ -262,3 +264,28 @@ export const viewPropertyOfParticularUser= async(req,res)=>{
       res.status(500).json({ message: 'Server error' });
     }
  }
+
+ //Delete Property
+
+ export const deleteProperty = async (req, res) => {
+    console.log(req.params + " abc");
+  
+    try {
+      // Extract property ID from the request parameters
+      const { propertyId } = req.params;
+  
+      // Find the property by ID and delete it
+      const deletedProperty = await Property.findByIdAndDelete(propertyId);
+  
+      // Check if the property was found and deleted
+      if (!deletedProperty) {
+        return res.status(404).json({ message: 'Property not found' });
+      }
+  
+      // Send a success response
+      res.status(200).json({ message: 'Property deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  }

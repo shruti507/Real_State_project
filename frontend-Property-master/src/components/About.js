@@ -1,5 +1,5 @@
 import React from 'react';
-import './Signup.css';  // Import custom styles for the component
+import './Style.css';  // Import custom styles for the component
 
 const AboutUs = () => {
   return (

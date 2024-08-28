@@ -6,7 +6,7 @@ export const createContact = async (req, res) => {
     const { userId, name, surname, email, message } = req.body;
     console.log(req.body) 
     try {   
-        const newContact = new Contact({ userId, name, surname, email, message });
+        const newContact = new Contact(req.body);
         await newContact.save(); // Save new contact
         return res.status(201).json({ msg: 'Contact created successfully', contact: newContact });
     } catch (err) {
@@ -27,6 +27,7 @@ export const getContacts = async (req, res) => {
 
 export const getContactById = async (req, res) => {
     const { id } = req.params;
+    console.log(id);
 
     try {
         const contact = await Contact.findById(id); // Fetch contact by ID

@@ -37,7 +37,8 @@ function Header(props) {
 
   // Function to fetch properties based on search term
   const fetchFilteredProperties = (term) => {
-    axios.get(`http://localhost:3000/properties/searchProperties?address=${term}`)
+    const url = `${process.env.REACT_APP_PROPERTY_SEARCH_URL}?address=${term}`;
+    axios.get(url)
     .then(result => {
         console.log(result.data)
         setProperties(result.data)
@@ -80,13 +81,13 @@ function Header(props) {
                 <a className="nav-link active" href="/" aria-current="page">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#about">About Us</a>
+                <a className="nav-link" onClick={() =>navigate("/AboutUs")} style={{cursor:"pointer"}}>About Us</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#contact">Contact</a>
+                <a className="nav-link" onClick={() =>navigate("/Contact")} style={{cursor:"pointer"}}>Contact</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/user-property")}>Properties</a>
+                <a className="nav-link" onClick={() => navigate("/user-property")} style={{cursor:"pointer"}}>Properties</a>
               </li>
             </ul>
             <form className="d-flex ms-auto mb-2 mb-lg-0" role="search">
@@ -108,7 +109,7 @@ function Header(props) {
               ) : (
                 <button className="btn btn-primary me-2" onClick={handleLoginClick} aria-label="Login">Login</button>
               )}
-              <button className="btn btn-light">
+              <button className="btn btn-light"  onClick={()=>navigate("/fav")}>
                 <FaHeart size={20} aria-label="Favorites" />
               </button>
             </div>
