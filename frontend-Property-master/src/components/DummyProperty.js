@@ -8,7 +8,7 @@ import nodataImg from '../Images/NoData.png';
 
 function DummyProperty(props) {
   const navigate = useNavigate();
-  const { properties } = props;
+  const { itemList } = props;
 
   const addContact = (agentId) => {
     navigate('/contact', { state: { agentId } });
@@ -54,12 +54,12 @@ function DummyProperty(props) {
       <div className="container-lg mt-5 p-4 mb-5 bg-light rounded">
         <h2 className="m-2 text-center">Available Properties</h2>
         <div className="row">
-          {properties.length === 0 ? (
+          {itemList.length === 0 ? (
             <div className='container d-flex justify-content-center align-items-center'>
               <img src={nodataImg} style={{ height: '400px', width: '400px' }} alt='no image' />
             </div>
           ) : (
-            properties?.map(property => (
+            itemList?.map(property => (
               <div className="col-md-4 mb-4" key={property._id}>
                 <div className="card shadow-sm border-light">
                   <img

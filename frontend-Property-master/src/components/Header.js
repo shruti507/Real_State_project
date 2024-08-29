@@ -83,9 +83,7 @@ function Header(props) {
               <li className="nav-item">
                 <a className="nav-link" onClick={() =>navigate("/AboutUs")} style={{cursor:"pointer"}}>About Us</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" onClick={() =>navigate("/Contact")} style={{cursor:"pointer"}}>Contact</a>
-              </li>
+              
               <li className="nav-item">
                 <a className="nav-link" onClick={() => navigate("/user-property")} style={{cursor:"pointer"}}>Properties</a>
               </li>

@@ -28,15 +28,15 @@ export default function Home() {
 
       useEffect(()=>{
         dispatch(fetchItems());
-        setProperties(itemList)
       },[])
       // console.log(itemList)
       console.log(properties)
     return <>
         <Header setProperties={setProperties}/>
         <CarCarousel />
-        <DummyProperty properties={properties}/>
+        <DummyProperty itemList={itemList}/>
         <AboutUs />
+        <Footer/>
         
     </>
 }
